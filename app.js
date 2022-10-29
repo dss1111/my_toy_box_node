@@ -1,10 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 
+
+//app.use('/api',route);
+
 app.listen(process.env.PORT, function(){
-    console.log("app start on 8080");
+    console.log(`app start on ${process.env.PORT}`);
 });
 
-app.get('/', function(req, res){
-    res.send('homepage');
-})
+app.use(express.static(__dirname+"/build"));
+app.get('/', function(request, response){
+    response.sendFile('index.js');
+});
